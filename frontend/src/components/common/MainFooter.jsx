@@ -1,49 +1,49 @@
 import React from 'react';
-import { Activity, ShieldCheck, Heart } from 'lucide-react';
+import { ShieldCheck, Heart } from 'lucide-react';
+import Logo from './Logo';
 
 export default function MainFooter({ onNavigate }) {
   return (
-    <footer className="bg-white border-t border-[#E5ECEA] py-10 mt-16 text-[#64748B]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
+    <footer className="bg-white border-t border-[#e5ecea] py-12 mt-20 text-[#52616b]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#E7F5F2] text-[#0D9488] flex items-center justify-center">
-              <Activity className="w-4 h-4" />
-            </div>
+          <div className="flex items-center gap-3">
+            {/* Custom Brand Logo Mark */}
+            <Logo className="w-6 h-6 shrink-0" />
             <div>
-              <span className="font-heading font-extrabold text-base text-[#16324A] tracking-tight">
-                Report<span className="text-[#0D9488]">Saathi</span>
+              <span className="font-sans font-bold text-lg text-[#0a3d36] tracking-tight">
+                Report<span className="font-normal text-[#084d46]">Saathi</span>
               </span>
-              <span className="text-xs text-[#94A3B8] ml-2">Educational Lab Report Companion</span>
+              <span className="text-xs text-[#64748b] ml-2 font-normal">Educational Lab Report Companion</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-5 text-xs font-medium">
+          <div className="flex flex-wrap items-center gap-5 text-xs font-medium">
             <button 
               onClick={() => { onNavigate?.('landing'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="hover:text-[#0D9488] transition-colors"
+              className="hover:text-[#084d46] transition-colors"
             >
               About Platform
             </button>
             <button 
               onClick={() => { onNavigate?.('dashboard'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="hover:text-[#0D9488] transition-colors"
+              className="hover:text-[#084d46] transition-colors"
             >
-              Dashboard
+              Patient Dashboard
             </button>
-            <span className="inline-flex items-center gap-1 text-[#0D9488] bg-[#E7F5F2] px-2.5 py-0.5 rounded-full text-[11px] font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5" /> 100% Non-Diagnostic
+            <span className="inline-flex items-center gap-1 text-[#084d46] bg-[#ebf3ea] px-3 py-1 rounded-full text-[11px] font-semibold border border-[#dce8dc]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#084d46]" /> 100% Non-Diagnostic
             </span>
           </div>
         </div>
 
-        <div className="border-t border-[#F1F5F9] pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-[#94A3B8]">
+        <div className="border-t border-[#f1f5f9] pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-[#94a3b8]">
           <p className="max-w-2xl leading-relaxed">
-            ReportSaathi is intended strictly for patient education and health literacy enhancement. 
-            All extracted laboratory values must be reviewed with your primary physician or licensed clinician.
+            ReportSaathi is intended strictly for health literacy and patient education. 
+            All extracted laboratory values must be reviewed directly with your primary care physician or licensed medical professional.
           </p>
           <p className="shrink-0 text-[11px]">
-            &copy; {new Date().getFullYear()} ReportSaathi. Built for patient empowerment.
+            &copy; {new Date().getFullYear()} ReportSaathi. Inspired by humane healthcare.
           </p>
         </div>
       </div>

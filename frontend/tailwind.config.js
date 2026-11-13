@@ -9,8 +9,19 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         heading: ['Manrope', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Newsreader', 'Lora', 'Georgia', 'serif'],
       },
       colors: {
+        onemedical: {
+          forest: '#084d46',
+          forestDark: '#053934',
+          forestHeading: '#0a3d36',
+          sage: '#ebf3ea',
+          sageLight: '#f4f8f4',
+          sageBorder: '#dce8dc',
+          cream: '#fafaf7',
+          muted: '#52616b',
+        },
         health: {
           teal: '#0D9488',
           deepTeal: '#0F766E',

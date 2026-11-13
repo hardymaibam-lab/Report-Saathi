@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Activity, Plus, Menu, X, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { 
+  Plus, 
+  Menu, 
+  X, 
+  ChevronDown, 
+  Search, 
+  ShieldCheck, 
+  Sparkles,
+  FileText
+} from 'lucide-react';
+import Logo from './Logo';
 
 export default function MainNavbar({ 
   currentView, 
@@ -17,116 +27,130 @@ export default function MainNavbar({
   };
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E5ECEA] transition-all">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Brand */}
-        <div 
-          onClick={() => handleNavClick('landing')}
-          className="flex items-center gap-3 cursor-pointer group select-none"
-        >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#0D9488] to-[#14B8A6] flex items-center justify-center text-white shadow-subtle group-hover:scale-105 transition-transform">
-            <Activity className="w-5 h-5" />
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-heading font-extrabold text-xl tracking-tight text-[#16324A]">
-              Report<span className="text-[#0D9488]">Saathi</span>
+    <header className="sticky top-0 z-30 bg-white border-b border-[#e5ecea] transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+        {/* Left: One Medical Style Dot-Cluster Logo + Brand */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div 
+            onClick={() => handleNavClick('landing')}
+            className="flex items-center gap-2.5 cursor-pointer group select-none"
+          >
+            {/* Custom Brand Logo Mark */}
+            <Logo className="w-8 h-8 shrink-0 transition-transform group-hover:scale-105" />
+
+            <span className="font-sans font-bold text-[22px] tracking-tight text-[#0a3d36]">
+              Report<span className="font-normal text-[#084d46]">Saathi</span>
             </span>
-            {isLive ? (
-              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 bg-[#ECFDF5] text-[#065F46] rounded-md border border-[#A7F3D0]">
-                Live API
-              </span>
-            ) : (
-              <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 bg-[#FFF7E6] text-[#92400E] rounded-md border border-[#FEEBC8]">
-                Demo Mode
-              </span>
-            )}
+          </div>
+
+          {/* Announcement / Status Pill */}
+          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#ebf3ea] text-[#084d46] border border-[#dce8dc]">
+            <Sparkles className="w-3.5 h-3.5 text-[#084d46]" />
+            <span>AI + OCR Companion</span>
           </div>
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1.5 sm:gap-2">
-          <button
-            onClick={() => handleNavClick('landing')}
-            className={`text-xs font-semibold px-3.5 py-2 rounded-xl transition-colors ${
-              currentView === 'landing'
-                ? 'text-[#0D9488] bg-[#E7F5F2]'
-                : 'text-[#64748B] hover:text-[#16324A] hover:bg-[#F7FAF9]'
-            }`}
-          >
-            About
-          </button>
-
+        {/* Center: Clean One Medical Navigation Links */}
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium text-[#2d3748]">
           <button
             onClick={() => handleNavClick('dashboard')}
-            className={`text-xs font-semibold px-3.5 py-2 rounded-xl transition-colors ${
-              currentView === 'dashboard'
-                ? 'text-[#0D9488] bg-[#E7F5F2]'
-                : 'text-[#64748B] hover:text-[#16324A] hover:bg-[#F7FAF9]'
+            className={`transition-colors hover:text-[#084d46] ${
+              currentView === 'dashboard' ? 'text-[#084d46] font-semibold' : ''
             }`}
           >
             Dashboard
           </button>
 
-          <div className="h-4 w-[1px] bg-[#E5ECEA] mx-1" />
+          <button
+            onClick={() => handleNavClick('landing')}
+            className={`flex items-center gap-1 transition-colors hover:text-[#084d46] ${
+              currentView === 'landing' ? 'text-[#084d46] font-semibold' : ''
+            }`}
+          >
+            <span>How It Works</span>
+            <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+          </button>
 
           <button
-            onClick={onOpenUpload}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold rounded-btn text-xs shadow-teal-glow transition-all active:scale-[0.98]"
+            onClick={() => {
+              handleNavClick('landing');
+              setTimeout(() => {
+                const el = document.getElementById('supported-panels');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+            className="transition-colors hover:text-[#084d46]"
           >
-            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span>Upload Report</span>
+            Supported Panels
+          </button>
+
+          <button
+            onClick={() => {
+              handleNavClick('landing');
+              setTimeout(() => {
+                const el = document.getElementById('educational-philosophy');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+            className="flex items-center gap-1 transition-colors hover:text-[#084d46]"
+          >
+            <span>Our Philosophy</span>
+            <ChevronDown className="w-3.5 h-3.5 opacity-60" />
           </button>
         </nav>
 
-        {/* Mobile Hamburger Button */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Right: Actions, Pill Button & Controls */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          <button
+            onClick={() => handleNavClick('dashboard')}
+            className="hidden sm:inline-block text-xs font-semibold text-[#0a3d36] hover:text-[#084d46] transition-colors"
+          >
+            Patient Portal
+          </button>
+
+          {/* One Medical Style Forest Green Pill Button */}
           <button
             onClick={onOpenUpload}
-            className="flex items-center gap-1 px-3 py-1.5 bg-[#0D9488] text-white font-semibold rounded-btn text-xs shadow-subtle"
+            className="px-6 py-2.5 bg-[#084d46] hover:bg-[#063f39] text-white font-semibold rounded-full text-xs sm:text-sm transition-all shadow-sm active:scale-[0.98] flex items-center gap-1.5"
           >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Upload</span>
+            <Plus className="w-4 h-4 stroke-[2.5]" />
+            <span>Upload report</span>
           </button>
+
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-[#64748B] hover:text-[#16324A] hover:bg-[#F7FAF9] rounded-lg transition-colors"
+            className="p-2 text-[#2d3748] hover:text-[#084d46] rounded-lg md:hidden transition-colors"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Dropdown */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[#E5ECEA] bg-white px-4 py-3 space-y-1.5 animate-fadeIn shadow-card">
+        <div className="md:hidden border-t border-[#e5ecea] bg-white px-5 py-4 space-y-2 animate-fadeIn shadow-lg">
           <button
             onClick={() => handleNavClick('landing')}
-            className={`w-full text-left text-xs font-semibold px-3 py-2.5 rounded-lg transition-colors flex items-center justify-between ${
-              currentView === 'landing' ? 'bg-[#E7F5F2] text-[#0D9488]' : 'text-[#64748B] hover:bg-[#F7FAF9]'
-            }`}
+            className="w-full text-left text-sm font-medium py-2 text-[#2d3748] hover:text-[#084d46]"
           >
-            <span>About ReportSaathi</span>
-            {currentView === 'landing' && <span className="w-1.5 h-1.5 rounded-full bg-[#0D9488]" />}
+            Home & How It Works
           </button>
           <button
             onClick={() => handleNavClick('dashboard')}
-            className={`w-full text-left text-xs font-semibold px-3 py-2.5 rounded-lg transition-colors flex items-center justify-between ${
-              currentView === 'dashboard' ? 'bg-[#E7F5F2] text-[#0D9488]' : 'text-[#64748B] hover:bg-[#F7FAF9]'
-            }`}
+            className="w-full text-left text-sm font-medium py-2 text-[#2d3748] hover:text-[#084d46]"
           >
-            <span>Patient Dashboard</span>
-            {currentView === 'dashboard' && <span className="w-1.5 h-1.5 rounded-full bg-[#0D9488]" />}
+            Patient Dashboard
           </button>
           <button
             onClick={() => {
               onOpenUpload();
               setMobileMenuOpen(false);
             }}
-            className="w-full text-left text-xs font-semibold px-3 py-2.5 rounded-lg bg-[#0D9488] text-white transition-colors flex items-center justify-between"
+            className="w-full text-center text-sm font-semibold py-3 rounded-full bg-[#084d46] text-white transition-all shadow-sm mt-2"
           >
-            <span>Upload New Report</span>
-            <Plus className="w-4 h-4" />
+            Upload Report
           </button>
         </div>
       )}

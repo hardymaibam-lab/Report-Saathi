@@ -1,5 +1,6 @@
 import React from 'react';
 import { Activity, History, ShieldAlert, Sparkles } from 'lucide-react';
+import Logo from './Logo';
 
 export default function Navbar({ onOpenHistory, onReset, historyCount = 0 }) {
   return (
@@ -10,8 +11,8 @@ export default function Navbar({ onOpenHistory, onReset, historyCount = 0 }) {
           onClick={onReset}
           className="flex items-center gap-3 cursor-pointer group"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform">
-            <Activity className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
+            <Logo className="w-10 h-10" />
           </div>
           <div>
             <div className="flex items-center gap-2">

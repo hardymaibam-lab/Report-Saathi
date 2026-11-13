@@ -122,7 +122,14 @@ async def chat_about_report(payload: ChatRequest):
             detail="No report context found. Please provide active report data to ask questions."
         )
 
-    result = await answer_report_question(payload.question, context)
+    # Convert pydantic history models to dicts if present
+    history_dicts = [h.model_dump() for h in payload.history] if payload.history else []
+
+    result = await answer_report_question(
+        question=payload.question, 
+        report_context=context,
+        history=history_dicts
+    )
     return ChatResponse(**result)
 
 @router.post("/save")

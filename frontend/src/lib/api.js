@@ -27,14 +27,15 @@ export async function analyzeReportFile(file) {
   return await res.json();
 }
 
-export async function askReportQuestion(question, reportContext, reportId = null) {
+export async function askReportQuestion(question, reportContext, reportId = null, history = []) {
   const res = await fetch(`${API_BASE}/api/reports/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       question,
       report_context: reportContext,
-      report_id: reportId
+      report_id: reportId,
+      history: history.map(m => ({ role: m.role, content: m.content }))
     }),
   });
 

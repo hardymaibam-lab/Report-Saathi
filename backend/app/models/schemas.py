@@ -58,15 +58,27 @@ class ChatMessage(BaseModel):
     role: str = Field(..., description="'user' or 'assistant'")
     content: str = Field(...)
 
+class BiomarkerCardData(BaseModel):
+    test_name: str
+    common_name: Optional[str] = None
+    extracted_value: str
+    unit: Optional[str] = None
+    reference_range: Optional[str] = None
+    status: str
+    explanation: Optional[str] = None
+    disclaimer: Optional[str] = None
+
 class ChatRequest(BaseModel):
     report_id: Optional[str] = None
-    question: str = Field(..., min_length=2, max_length=500)
+    question: str = Field(..., min_length=1, max_length=1000)
     report_context: Optional[Dict[str, Any]] = None
+    history: Optional[List[ChatMessage]] = Field(default_factory=list)
 
 class ChatResponse(BaseModel):
     answer: str
     supported_by_report: bool
     disclaimer: str = "Educational only. ReportSaathi does not diagnose or prescribe treatments."
+    biomarker: Optional[BiomarkerCardData] = None
 
 # Supabase save schemas
 class SaveReportRequest(BaseModel):

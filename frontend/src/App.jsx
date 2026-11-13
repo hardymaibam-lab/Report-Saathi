@@ -76,6 +76,7 @@ export default function App() {
       setReportsList(prev => [response, ...prev]);
       setActiveReport(response);
       setCurrentView('results');
+      window.scrollTo({ top: 0, behavior: 'instant' });
     } catch (err) {
       setErrorMessage(err.message || 'An error occurred during report processing. Please verify the document clarity.');
       setCurrentView('error');
@@ -90,6 +91,7 @@ export default function App() {
     setTimeout(() => {
       setActiveReport(sample);
       setCurrentView('results');
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }, 1000);
   };
 
@@ -111,16 +113,17 @@ export default function App() {
       default:
         setActiveReport(MOCK_REPORTS[0]);
         setCurrentView('results');
+        window.scrollTo({ top: 0, behavior: 'instant' });
         break;
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#F7FAF9] flex flex-col font-sans text-[#172B3A] selection:bg-[#E7F5F2] selection:text-[#0F766E]">
+    <div className="min-h-screen bg-white flex flex-col font-sans text-[#172B3A] selection:bg-[#ebf3ea] selection:text-[#084d46]">
       {/* 1. Global Announcement / Medical Disclaimer */}
       <DisclaimerBanner />
 
-      {/* 2. Premium Navigation Bar */}
+      {/* 2. One Medical Style Navigation Bar */}
       <MainNavbar 
         currentView={currentView}
         onNavigate={handleNavigate}
@@ -129,7 +132,9 @@ export default function App() {
       />
 
       {/* 3. Main Dynamic Content Area */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <main className={`flex-1 w-full mx-auto ${
+        currentView === 'landing' ? 'max-w-7xl px-4 sm:px-8 py-6' : 'max-w-6xl px-4 sm:px-6 py-6 sm:py-8'
+      }`}>
         {/* Landing Page */}
         {currentView === 'landing' && (
           <LandingPage

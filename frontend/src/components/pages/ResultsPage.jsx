@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   AlertTriangle, 
   ArrowLeft, 
@@ -36,6 +36,11 @@ export default function ResultsPage({ report, onBackToDashboard, onUploadNew }) 
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveFeedback, setSaveFeedback] = useState(null);
+
+  // Ensure viewing results always starts at the top (Report Overview) without auto-scrolling to child sections
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [report?.id]);
 
   if (!report) return null;
 
